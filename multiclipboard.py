@@ -2,13 +2,18 @@ import sys
 import clipboard
 import json
 
-SAVED_DATA = "clipboard.json"
 
-def save_data(filepath, data):
+SAVED_DATA = "clipboard.json"  # saves information inside a json to read
+
+
+def save_data(filepath, data):  # write the data into a saved file
     with open(filepath, "w") as f:
         json.dump(data, f)
-    
-def load_data(filepath):
+
+
+def load_data(
+    filepath,
+):  # tries and gets the information returns empty dictionary if no info
     try:
         with open(filepath, "r") as f:
             data = json.load(f)
@@ -16,7 +21,10 @@ def load_data(filepath):
     except:
         return {}
 
-if len(sys.argv) == 2:
+
+if (
+    len(sys.argv) == 2
+):  # depending on the command line args save/load/provide a list of saved clipboard information
     command = sys.argv[1]
     data = load_data(SAVED_DATA)
 
@@ -33,7 +41,7 @@ if len(sys.argv) == 2:
             print("Data copied to clipboard")
         else:
             print("Key does not exist")
-        
+
     elif command == "list":
         print(data)
 
